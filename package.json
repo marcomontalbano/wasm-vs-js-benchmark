@@ -1,0 +1,17 @@
+{
+  "name": "wa-vs-js-benchmark",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Marco Montalbano <marcomontalbano.work@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
