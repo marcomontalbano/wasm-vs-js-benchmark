@@ -1,20 +1,63 @@
-import { rs_get_primes } from '../pkg/wa_vs_js_benchmark';
-import { js_get_primes } from './primes';
+
+import RSWorker from './webworker/rs.worker';
+import JSWorker from './webworker/js.worker';
 
 
-let jsBegin = Date.now();
-console.log(`JS | total primes: ${js_get_primes(100000)}`);
-let jsEnd = Date.now();
+const createWorker = (Worker, message) => {
+    return new Promise((resolve, reject) => {
+        const worker = new Worker();
+        worker.onmessage = event => {
+            resolve(event.data);
+            worker.terminate();
+        };
+        worker.onerror = e => reject(e);
+        worker.onmessageerror = e => reject(e);
+        worker.postMessage(message);
+    });
+};
 
-let rsBegin = Date.now();
-console.log(`RS | total primes: ${rs_get_primes(100000)}`);
-let rsEnd = Date.now();
+const createJSWorker = (message) => {
+    return new Promise((resolve, reject) => {
+        const worker = new JSWorker();
+        worker.onmessage = event => {
+            console.log('JS • mainthread got:', event.data);
+            resolve(event.data);
+            worker.terminate();
+        };
+        worker.onerror = e => reject(e);
+        worker.onmessageerror = e => reject(e);
+        worker.postMessage(message);
+    });
+};
 
-let jsDiff = jsEnd - jsBegin;
-let rsDiff = rsEnd - rsBegin;
+const runMethodMultipleTimes = (method, times) => {
+    const values = [];
+    return [...Array(times +1).keys()]
+        .map(i => {
+            return () => method()
+        })
+        .reduce((p, fn) => {
+            return p.then(value => {
+                if (value !== undefined) {
+                    values.push(value);
+                }
+                if (values.length === times) {
+                    return values;
+                }
 
-console.log(`prime.js: ${jsDiff} ms`);
-console.log(`prime.rs: ${rsDiff} ms`);
+                return fn(value);
+            })
+        }, Promise.resolve())
+};
 
-console.log(`WA is faster than JS: ${jsDiff - rsDiff} ms`);
-console.log(`${((rsDiff * 100 / jsDiff) - 100).toFixed(2)}%`);
+runMethodMultipleTimes(() => {
+    return createWorker(RSWorker, {
+        method: 'rs_get_primes',
+        args: [100000]
+    })
+}, 3).then((results) => {
+    console.log(`RS done`, results);
+});
+
+
+// createJSWorker({});
