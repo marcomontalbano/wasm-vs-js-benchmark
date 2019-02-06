@@ -1,5 +1,5 @@
-mod wasm;
+mod rs;
 
 fn main() {
-    println!("total primes: {}", wasm::primes::rs_get_primes(100000));
+    println!("total primes: {}", rs::primes::get_primes(100000));
 }

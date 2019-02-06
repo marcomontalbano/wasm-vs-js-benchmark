@@ -1,14 +1,16 @@
-# RS
+# WebAssembly vs Javascript
 
 ```sh
 
 cargo test
+
 cargo build
+cargo run
 
-./target/debug/hello-wasm
-./target/release/hello-wasm
+cargo build --release
+cargo run --release
 
-wasm-pack build -d public/pkg
+wasm-pack build
 
 ```
 

@@ -1,15 +1,15 @@
 
-import { js_get_primes } from '../primes';
+import * as mod from '../mod';
 
 onmessage = e => {
 
     const begin = Date.now();
-    const value = js_get_primes(100000);
+    const value = mod[e.data.method](...e.data.args);
     const end = Date.now();
     const diff = end - begin;
 
     postMessage({
-        data: e.data,
+        data: { worker: 'js', ...e.data },
         value,
         diff,
     });

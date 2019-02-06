@@ -1,1 +1,1 @@
-mod wasm;
+mod rs;
