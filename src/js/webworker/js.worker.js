@@ -6,12 +6,12 @@ onmessage = e => {
     const begin = Date.now();
     const value = mod[e.data.method](...e.data.args);
     const end = Date.now();
-    const diff = end - begin;
+    const executionTime = end - begin;
 
     postMessage({
         data: { worker: 'js', ...e.data },
         value,
-        diff,
+        executionTime,
     });
 
 }

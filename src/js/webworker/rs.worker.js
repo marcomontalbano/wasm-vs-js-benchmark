@@ -14,12 +14,12 @@ onmessage = e => {
             const begin = Date.now();
             const value = results.instance.exports[e.data.method](...e.data.args);
             const end = Date.now();
-            const diff = end - begin;
+            const executionTime = end - begin;
 
             postMessage({
                 data: { worker: 'rs', ...e.data },
                 value,
-                diff,
+                executionTime,
             });
         });
 }
