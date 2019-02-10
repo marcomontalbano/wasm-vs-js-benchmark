@@ -11,7 +11,9 @@
     "build:js": "webpack --mode=production --config webpack.config.js",
     "build": "npm-run-all build:wasm build:js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "chart.js": "~2.7.3"
+  },
   "devDependencies": {
     "copy-webpack-plugin": "^4.6.0",
     "file-loader": "^3.0.1",

@@ -16,7 +16,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /worker\.js$/,
+                test: /[js|rs]\.worker\.js$/,
                 use: {
                     loader: 'worker-loader',
                     options: {

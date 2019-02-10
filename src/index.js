@@ -1,51 +1,76 @@
 
-import RSWorker from './js/webworker/rs.worker';
-import JSWorker from './js/webworker/js.worker';
+import { benchmarkWorker } from './js/webworker/worker';
 
-const createWorker = (Worker, message) => {
-    return new Promise((resolve, reject) => {
-        const worker = new Worker();
-        worker.onmessage = event => {
-            resolve(event.data);
-            worker.terminate();
-        };
-        worker.onerror = e => reject(e);
-        worker.onmessageerror = e => reject(e);
-        worker.postMessage(message);
+import Chart from 'chart.js';
+
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            {
+                label: 'JS Benchmark',
+                data: [],
+                fill: false,
+                borderColor: 'red',
+            },
+            {
+                label: 'RS Benchmark',
+                data: [],
+                fill: false,
+                borderColor: 'blue',
+            }
+        ]
+    }
+});
+
+const chart_addData = (chart, label, value) => {
+    chart.data.datasets.forEach((dataset) => {
+        if (dataset.label === label) {
+            dataset.data.push(value);
+        }
     });
-};
 
-const _benchmarkWorker = (fns, times, cycle = () => {}) => {
-    const values = [];
-    return fns.reduce((res, current) => res.concat(Array(times).fill(current)), [])
-        .reduce((promise, fn) => {
-            return promise
-                .then(value => {
-                    if (value) {
-                        cycle(value);
-                        values.push(value);
-                    }
-                    return fn(value);
-                })
-        }, Promise.resolve())
-        .then((value) => {
-            cycle(value);
-            values.push(value);
-            return values;
-        })
-};
+    const dataLength = chart.data.datasets.reduce((p, c) => {
+        return p < c.data.length ? c.data.length : p
+    }, 0);
 
-const benchmarkWorker = (message, times, cycle) => {
-    return _benchmarkWorker([
-        () => createWorker(RSWorker, message),
-        () => createWorker(JSWorker, message),
-    ], times, cycle);
+    if (dataLength > chart.data.labels.length) {
+        chart.data.labels.push(chart.data.labels.length +1);
+    }
+
+    chart.update();
 }
 
+window.chart = myChart;
+
+const times = 5;
 benchmarkWorker({
+    method: 'get_primes',
+    args: [100000]
+},
+    times,
+    value => {
+        chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.diff);
+        console.log(`cycle ${value.data.worker}`, value)
+    }
+).then(value => {
+    console.log(`done`, value);
+});
+
+
+document.getElementById('addData').addEventListener('click', () => {
+    benchmarkWorker({
         method: 'get_primes',
         args: [100000]
     },
-    2,
-    value => console.log(`cycle ${value.data.worker}`, value)
-).then(value => console.log(`done`, value));
+        1,
+        value => {
+            chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.diff);
+            console.log(`cycle ${value.data.worker}`, value)
+        }
+    ).then(value => {
+        console.log(`done`, value);
+    });
+});
