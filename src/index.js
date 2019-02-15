@@ -1,5 +1,5 @@
 
-import { benchmarkWorker } from './js/webworker/worker';
+import { runBenchmark } from './js/webworker/worker';
 
 import Chart from 'chart.js';
 
@@ -78,31 +78,31 @@ const chart_addData = (chart, label, value) => {
 
 
 const times = 5;
-benchmarkWorker({
+runBenchmark({
     method: 'get_primes',
     args: [100000]
 },
     times,
-    value => {
-        chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.performance.measure.duration);
-        console.log(`cycle ${value.data.worker}`, value)
+    data => {
+        chart_addData(myChart, `${data.workerName.toUpperCase()} Benchmark`, data.performance.measure.duration);
+        console.log(`cycle ${data.workerName}`, data)
     }
-).then(value => {
-    console.log(`done`, value);
+).then(data => {
+    console.log(`done`, data);
 });
 
 
 document.getElementById('addData').addEventListener('click', () => {
-    benchmarkWorker({
+    runBenchmark({
         method: 'get_primes',
         args: [100000]
     },
         1,
-        value => {
-            chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.performance.measure.duration);
-            console.log(`cycle ${value.data.worker}`, value)
+        data => {
+            chart_addData(myChart, `${data.workerName.toUpperCase()} Benchmark`, data.performance.measure.duration);
+            console.log(`cycle ${data.workerName}`, data)
         }
-    ).then(value => {
-        console.log(`done`, value);
+    ).then(data => {
+        console.log(`done`, data);
     });
 });

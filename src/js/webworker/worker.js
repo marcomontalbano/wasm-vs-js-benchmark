@@ -2,29 +2,39 @@
 import RSWorker from './rs.worker';
 import JSWorker from './js.worker';
 
-const rsWorker = new RSWorker();
-const jsWorker = new JSWorker();
+const createPromiseWorker = Worker => {
+    const worker = new Worker();
+    const eventListener = [];
 
-const worker_postMessage = (worker, message) => {
-    return new Promise((resolve, reject) => {
-        worker.onmessage = event => {
-            resolve(event.data);
-        };
-        worker.onerror = e => reject(e);
-        worker.onmessageerror = e => reject(e);
-        worker.postMessage(message);
-    });
-}
+    worker.onmessage = function (event) {
+        eventListener[parseInt(event.data.id)].resolve(event.data);
+    };
 
-const worker_setTimeout_postMessage = (worker, message, time) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            worker_postMessage(worker, message)
-                .then(v => resolve(v))
-                .catch(e => reject(e))
-        }, time);
-    });
-}
+    const postMessage = payload => {
+        const id = eventListener.length;
+
+        return new Promise((resolve, reject) => {
+            eventListener[id] = { resolve, reject };
+            worker.postMessage({ id, payload });
+        });
+    };
+
+    return {
+        // postMessage,
+        postMessage: payload => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    postMessage(payload)
+                        .then(v => resolve(v))
+                        .catch(e => reject(e))
+                }, 100);
+            });
+        }
+    }
+};
+
+const rsWorker = createPromiseWorker(RSWorker);
+const jsWorker = createPromiseWorker(JSWorker);
 
 const _benchmarkWorker = (fns, times, cycle = () => {}) => {
     const values = [];
@@ -46,9 +56,9 @@ const _benchmarkWorker = (fns, times, cycle = () => {}) => {
         })
 };
 
-export const benchmarkWorker = (message, times, cycle, timeout = 100) => {
+export const runBenchmark = (payload, times, cycle) => {
     return _benchmarkWorker([
-        () => worker_setTimeout_postMessage(rsWorker, message, timeout),
-        () => worker_setTimeout_postMessage(jsWorker, message, timeout),
+        () => rsWorker.postMessage(payload),
+        () => jsWorker.postMessage(payload),
     ], times, cycle);
 }

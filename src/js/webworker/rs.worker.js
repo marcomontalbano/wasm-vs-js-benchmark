@@ -7,12 +7,13 @@ onmessage = e => {
 
     WebAssembly.instantiateStreaming(fetch(wasm), { './wa_vs_js_benchmark': _exp }).then(results => {
 
-        const performance = measure(e.data.method, () => {
-            return results.instance.exports[e.data.method](...e.data.args)
+        const performance = measure(e.data.payload.method, () => {
+            return results.instance.exports[e.data.payload.method](...e.data.payload.args)
         })
 
         postMessage({
-            data: { ...e.data, worker: 'rs' },
+            ...e.data,
+            workerName: 'rs',
             performance
         })
 

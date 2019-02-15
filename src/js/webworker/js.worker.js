@@ -4,12 +4,13 @@ import { measure } from './performance';
 
 onmessage = e => {
 
-    const performance = measure(e.data.method, () => {
-        return mod[e.data.method](...e.data.args)
+    const performance = measure(e.data.payload.method, () => {
+        return mod[e.data.payload.method](...e.data.payload.args)
     })
 
     postMessage({
-        data: { ...e.data, worker: 'js' },
+        ...e.data,
+        workerName: 'js',
         performance
     })
 
