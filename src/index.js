@@ -84,7 +84,7 @@ benchmarkWorker({
 },
     times,
     value => {
-        chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.measure.duration);
+        chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.performance.measure.duration);
         console.log(`cycle ${value.data.worker}`, value)
     }
 ).then(value => {
@@ -99,7 +99,7 @@ document.getElementById('addData').addEventListener('click', () => {
     },
         1,
         value => {
-            chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.measure.duration);
+            chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.performance.measure.duration);
             console.log(`cycle ${value.data.worker}`, value)
         }
     ).then(value => {
