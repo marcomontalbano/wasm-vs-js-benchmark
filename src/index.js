@@ -3,18 +3,6 @@ import { benchmarkWorker } from './js/webworker/worker';
 
 import Chart from 'chart.js';
 
-const colors = {
-    red:         'hsl(347, 100%, 69%)',
-    red_light:   'hsl(347, 100%, 90%)',
-    orange:  'rgb(255, 159, 64)',
-    yellow:  'rgb(255, 205, 86)',
-    green:   'rgb(75, 192, 192)',
-    blue:    'hsl(204, 82%, 57%)',
-    blue_light:    'hsl(204, 82%, 90%)',
-    purple:  'rgb(153, 102, 255)',
-    grey:    'rgb(201, 203, 207)'
-};
-
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -25,15 +13,15 @@ var myChart = new Chart(ctx, {
                 label: 'JS Benchmark',
                 data: [],
                 fill: false,
-                backgroundColor: colors.red_light,
-                borderColor: colors.red,
+                backgroundColor: '#ffccd7',
+                borderColor: '#ff6183',
             },
             {
                 label: 'RS Benchmark',
                 data: [],
                 fill: false,
-                backgroundColor: colors.blue_light,
-                borderColor: colors.blue,
+                backgroundColor: '#d1eafa',
+                borderColor: '#37a3eb',
             }
         ]
     },
@@ -88,16 +76,15 @@ const chart_addData = (chart, label, value) => {
     chart.update();
 }
 
-window.chart = myChart;
 
-const times = 3;
+const times = 5;
 benchmarkWorker({
     method: 'get_primes',
     args: [100000]
 },
     times,
     value => {
-        chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.executionTime);
+        chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.measure.duration);
         console.log(`cycle ${value.data.worker}`, value)
     }
 ).then(value => {
@@ -112,7 +99,7 @@ document.getElementById('addData').addEventListener('click', () => {
     },
         1,
         value => {
-            chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.executionTime);
+            chart_addData(myChart, `${value.data.worker.toUpperCase()} Benchmark`, value.measure.duration);
             console.log(`cycle ${value.data.worker}`, value)
         }
     ).then(value => {

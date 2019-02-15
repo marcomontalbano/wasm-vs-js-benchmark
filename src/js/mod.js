@@ -1,1 +1,1 @@
-export {get_primes} from './lib/primes';
+export * from './lib/primes';

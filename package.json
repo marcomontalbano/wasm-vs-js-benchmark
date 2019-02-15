@@ -8,8 +8,10 @@
     "start": "webpack-dev-server --mode=development",
     "start:dist": "npx serve dist",
     "build:wasm": "wasm-pack build",
+    "build:rs": "cargo build --release",
     "build:js": "webpack --mode=production --config webpack.config.js",
-    "build": "npm-run-all build:wasm build:js"
+    "build": "npm-run-all build:rs benchmark build:wasm build:js",
+    "benchmark": "hyperfine --export-markdown BENCHMARK.md  --warmup 3 './target/release/wa-vs-js-benchmark get_primes 100000'"
   },
   "dependencies": {
     "chart.js": "~2.7.3"

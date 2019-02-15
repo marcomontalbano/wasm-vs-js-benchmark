@@ -11,15 +11,20 @@ onmessage = e => {
     WebAssembly.instantiateStreaming(fetch(wasm), importObject)
         .then(results => {
 
-            const begin = Date.now();
+            performance.mark(`${e.data.method}-start`);
             const value = results.instance.exports[e.data.method](...e.data.args);
-            const end = Date.now();
-            const executionTime = end - begin;
+            performance.mark(`${e.data.method}-end`);
+
+            performance.measure(`${e.data.method}-measure`, `${e.data.method}-start`, `${e.data.method}-end`);
+
+            const measures = performance.getEntriesByName(`${e.data.method}-measure`);
+            const measure = measures[measures.length -1];
 
             postMessage({
                 data: { worker: 'rs', ...e.data },
                 value,
-                executionTime,
+                measures: measures.map(e => e.toJSON()),
+                measure: measure.toJSON(),
             });
         });
 }

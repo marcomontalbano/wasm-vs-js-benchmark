@@ -3,15 +3,19 @@ import * as mod from '../mod';
 
 onmessage = e => {
 
-    const begin = Date.now();
+    performance.mark(`${e.data.method}-start`);
     const value = mod[e.data.method](...e.data.args);
-    const end = Date.now();
-    const executionTime = end - begin;
+    performance.mark(`${e.data.method}-end`);
+
+    performance.measure(`${e.data.method}-measure`, `${e.data.method}-start`, `${e.data.method}-end`);
+
+    const measures = performance.getEntriesByName(`${e.data.method}-measure`);
+    const measure = measures[measures.length - 1];
 
     postMessage({
         data: { worker: 'js', ...e.data },
         value,
-        executionTime,
+        measures: measures.map(e => e.toJSON()),
+        measure: measure.toJSON(),
     });
-
 }
