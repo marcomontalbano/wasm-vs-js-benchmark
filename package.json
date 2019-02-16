@@ -4,14 +4,19 @@
   "main": "index.js",
   "author": "Marco Montalbano <marcomontalbano.work@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcomontalbano/wa-vs-js-benchmark"
+  },
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "start:dist": "npx serve dist",
     "build:wasm": "wasm-pack build",
     "build:rs": "cargo build --release",
     "build:js": "webpack --mode=production --config webpack.config.js",
-    "build": "npm-run-all build:rs benchmark build:wasm build:js",
-    "benchmark": "hyperfine --export-markdown BENCHMARK.md  --warmup 3 './target/release/wa-vs-js-benchmark get_primes 100000'"
+    "build": "npm run build:wasm && npm run build:js",
+    "benchmark": "npm run build:rs && hyperfine --export-markdown BENCHMARK.md  --warmup 3 './target/release/wa-vs-js-benchmark get_primes 100000'",
+    "publish": "gh-pages -m 'Publish website.' -b 'gh-pages' -d 'dist' -r \"https://$GH_TOKEN@github.com/marcomontalbano/wa-vs-js-benchmark\""
   },
   "dependencies": {
     "chart.js": "~2.7.3"
@@ -19,8 +24,8 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.6.0",
     "file-loader": "^3.0.1",
-    "npm-run-all": "~4.1.5",
-    "webpack": "^4.29.1",
+    "gh-pages": "~2.0.1",
+    "webpack": "~4.29.4",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14",
     "worker-loader": "^2.0.0"
