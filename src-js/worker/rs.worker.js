@@ -1,6 +1,6 @@
 
-import wasm from '../../../pkg/wa_vs_js_benchmark_bg.wasm';
-import * as _exp from '../../../pkg/wa_vs_js_benchmark';
+import wasm from '../../pkg/wa_vs_js_benchmark_bg.wasm';
+import * as _exp from '../../pkg/wa_vs_js_benchmark';
 import { measure } from './performance';
 
 onmessage = e => {

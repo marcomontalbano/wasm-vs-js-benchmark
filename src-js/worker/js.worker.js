@@ -1,5 +1,5 @@
 
-import * as mod from '../mod';
+import * as mod from '../libs/mod';
 import { measure } from './performance';
 
 onmessage = e => {

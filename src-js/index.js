@@ -1,5 +1,5 @@
 
-import { runBenchmark } from './js/webworker/worker';
+import { runBenchmark } from './worker/utility';
 
 import Chart from 'chart.js';
 
