@@ -8,6 +8,7 @@ repository = "https://github.com/marcomontalbano/wa-vs-js-benchmark"
 edition = "2018"
 
 [lib]
+path = "src/libs/mod.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
