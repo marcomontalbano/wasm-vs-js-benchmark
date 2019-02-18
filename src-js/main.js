@@ -79,30 +79,32 @@ const chart_addData = (chart, label, value) => {
 
 const times = 5;
 runBenchmark({
-    method: 'get_primes',
-    args: [100000]
-},
+        method: 'get_primes',
+        args: [100000]
+    },
     times,
-    data => {
-        chart_addData(myChart, `${data.workerName.toUpperCase()} Benchmark`, data.performance.measure.duration);
-        console.log(`cycle ${data.workerName}`, data)
+    value => {
+        chart_addData(myChart, `${value.workerName.toUpperCase()} Benchmark`, value.performance.measure.duration);
+        console.log(`cycle ${value.workerName}`, value);
+        return value;
     }
-).then(data => {
-    console.log(`done`, data);
+).then(value => {
+    console.log(`done`, value);
 });
 
 
 document.getElementById('addData').addEventListener('click', () => {
     runBenchmark({
-        method: 'get_primes',
-        args: [100000]
-    },
+            method: 'get_primes',
+            args: [100000]
+        },
         1,
-        data => {
-            chart_addData(myChart, `${data.workerName.toUpperCase()} Benchmark`, data.performance.measure.duration);
-            console.log(`cycle ${data.workerName}`, data)
+        value => {
+            chart_addData(myChart, `${value.workerName.toUpperCase()} Benchmark`, value.performance.measure.duration);
+            console.log(`cycle ${value.workerName}`, value);
+            return value;
         }
-    ).then(data => {
-        console.log(`done`, data);
+    ).then(value => {
+        console.log(`done`, value);
     });
 });

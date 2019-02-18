@@ -36,29 +36,23 @@ const createPromiseWorker = Worker => {
 const rsWorker = createPromiseWorker(RSWorker);
 const jsWorker = createPromiseWorker(JSWorker);
 
-const _benchmarkWorker = (fns, times, cycle = () => {}) => {
-    const values = [];
-    return fns.reduce((res, current) => res.concat(Array(times).fill(current)), [])
-        .reduce((promise, fn) => {
-            return promise
-                .then(value => {
-                    if (value) {
-                        cycle(value);
-                        values.push(value);
-                    }
-                    return fn(value);
-                })
-        }, Promise.resolve())
-        .then((value) => {
-            cycle(value);
-            values.push(value);
-            return values;
+const _cloneArrayElements = (arr, times) => {
+    return arr.reduce((accumulator, currentValue) => {
+        return accumulator.concat(Array(times).fill(currentValue))
+    }, [])
+}
+
+const _promiseSequential = (fns) => {
+    return fns.reduce((promise, fn) => {
+        return promise.then(result => {
+            return fn().then(Array.prototype.concat.bind(result));
         })
+    }, Promise.resolve([]))
 };
 
-export const runBenchmark = (payload, times, cycle) => {
-    return _benchmarkWorker([
-        () => rsWorker.postMessage(payload),
-        () => jsWorker.postMessage(payload),
-    ], times, cycle);
+export const runBenchmark = (payload, times = 5, eachTime = value => value) => {
+    return _promiseSequential(_cloneArrayElements([
+        () => rsWorker.postMessage(payload).then(eachTime),
+        () => jsWorker.postMessage(payload).then(eachTime),
+    ], times));
 }
