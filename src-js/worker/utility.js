@@ -23,10 +23,10 @@ const createPromiseWorker = Worker => {
         // postMessage,
         postMessage: payload => {
             return new Promise((resolve, reject) => {
-                setTimeout(() => {
+                void setTimeout(() => {
                     postMessage(payload)
-                        .then(v => resolve(v))
-                        .catch(e => reject(e))
+                        .then(resolve)
+                        .catch(reject)
                 }, 100);
             });
         }
