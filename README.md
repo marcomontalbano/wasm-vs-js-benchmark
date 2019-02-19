@@ -121,11 +121,17 @@ Project is running at http://localhost:8080/
 
 ## Benchmark
 
-### Rust
+### Rust to Native Code
 
 The execution time of .wasm binaries is just a bit slower than the execution of same native code.
 
 For benchmarking the native code, I use [Hyperfine](https://github.com/sharkdp/hyperfine).
+
+These benchmarks are recorded on a MacBook Pro (15-inch, 2016) having these specs:
+
+- macOS Mojave
+- 2,6 GHz Intel Core i7 (4 cores)
+- 16 GB 2133 MHz LPDDR3
 
 ```sh
 cargo build --release
