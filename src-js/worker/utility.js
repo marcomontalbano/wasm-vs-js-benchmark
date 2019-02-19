@@ -42,10 +42,10 @@ const _cloneArrayElements = (arr, times) => {
     }, [])
 }
 
-const _promiseSequential = (fns) => {
+const _promiseSequential = fns => {
     return fns.reduce((promise, fn) => {
-        return promise.then(result => {
-            return fn().then(Array.prototype.concat.bind(result));
+        return promise.then(results => {
+            return fn().then([].concat.bind(results));
         })
     }, Promise.resolve([]))
 };
