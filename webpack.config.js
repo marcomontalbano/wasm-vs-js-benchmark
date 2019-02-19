@@ -9,6 +9,7 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
+            './public/.nojekyll',
             './public/index.html',
             './public/favicon.ico',
         ])
