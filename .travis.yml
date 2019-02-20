@@ -1,0 +1,11 @@
+language: node_js
+
+node_js:
+  - "8"
+
+before_script:
+  - curl https://sh.rustup.rs -sSf | sh
+
+script:
+  - npm run build
+  - npm run publish
