@@ -11,10 +11,11 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "start:dist": "npx serve dist",
+    "test:rs": "cargo build --verbose && cargo test --verbose",
     "build:wasm": "wasm-pack build",
     "build:rs": "cargo build --release",
     "build:js": "webpack --mode=production --config webpack.config.js",
-    "build": "npm run build:wasm && npm run build:js",
+    "build": "npm run build:rs && npm run build:wasm && npm run build:js",
     "benchmark": "npm run build:rs && hyperfine --export-markdown BENCHMARK.md  --warmup 3 './target/release/wa-vs-js-benchmark get_primes 100000'",
     "publish": "gh-pages -m 'Publish website.' -b 'gh-pages' -d 'dist' -r \"https://$GH_TOKEN@github.com/marcomontalbano/wa-vs-js-benchmark\""
   },
