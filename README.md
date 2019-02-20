@@ -1,5 +1,7 @@
 # WebAssembly vs Javascript
 
+[![Build Status](https://travis-ci.org/marcomontalbano/wa-vs-js-benchmark.svg?branch=master)](https://travis-ci.org/marcomontalbano/wa-vs-js-benchmark)
+
 *A comparison between WebAssembly and Javascript made for ~~studying~~ fun.*
 
 ## What's in the box
