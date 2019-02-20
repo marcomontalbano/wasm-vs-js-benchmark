@@ -6,6 +6,7 @@ node_js:
 before_script:
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
   - source $HOME/.cargo/env
+  - cargo install wasm-pack
 
 script:
   - npm run build
