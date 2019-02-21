@@ -1,0 +1,30 @@
+language: node_js
+
+# cache:
+#   directories:
+#     - $HOME/.cargo
+#     - $TRAVIS_BUILD_DIR/target
+
+node_js:
+  - "8"
+
+before_install:
+  - curl https://sh.rustup.rs -sSf | sh -s -- -y
+  - source $HOME/.cargo/env
+
+stages:
+  - test
+  - name: deploy
+    if: (NOT type IN (pull_request)) AND (branch = master)
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm test
+    - stage: deploy
+      before_script:
+        - cargo install wasm-pack
+      script:
+        - npm run build
+        - npm run publish

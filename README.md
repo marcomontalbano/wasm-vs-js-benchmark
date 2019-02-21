@@ -1,5 +1,7 @@
 # WebAssembly vs Javascript
 
+[![Build Status](https://travis-ci.org/marcomontalbano/wa-vs-js-benchmark.svg?branch=master)](https://travis-ci.org/marcomontalbano/wa-vs-js-benchmark)
+
 *A comparison between WebAssembly and Javascript made for ~~studying~~ fun.*
 
 ## What's in the box
@@ -7,6 +9,7 @@
 - WebAssembly with Rust
 - Benchmark with fancy charts
 - Web Workers to avoid a frozen main thread
+- Build and deploy with Travis CI
 
 ## Rust and WebAssembly
 
@@ -15,7 +18,7 @@ There are two books that fully cover this section:
 - https://doc.rust-lang.org/book
 - https://rustwasm.github.io/book
 
-In this project I'm also using [`wasm-bingen`](https://rustwasm.github.io/wasm-bindgen). This is a tool that facilitates high-level interactions between wasm modules and JavaScript.
+In this project I'm also using [`wasm-bingen`](https://rustwasm.github.io/wasm-bindgen) and [`wasm-pack`](https://github.com/rustwasm/wasm-pack).
 
 ## Project
 
@@ -60,6 +63,9 @@ Runnig following command we'll install Rust and [Cargo](https://doc.rust-lang.or
 
 ```sh
 $ curl https://sh.rustup.rs -sSf | sh
+
+# install `wasm-pack`
+$ cargo install wasm-pack
 ```
 
 Now we are able to use the following commands from our project folder.

@@ -11,6 +11,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "start:dist": "npx serve dist",
+    "test:rs": "cargo build --verbose && cargo test --verbose",
+    "test": "npm run test:rs",
     "build:wasm": "wasm-pack build",
     "build:rs": "cargo build --release",
     "build:js": "webpack --mode=production --config webpack.config.js",
