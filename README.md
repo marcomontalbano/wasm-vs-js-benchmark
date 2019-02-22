@@ -125,6 +125,13 @@ $ npm start
 Project is running at http://localhost:8080/
 
 
+### Unit Test
+
+You can run unit test for Rust and Javascript, simply running `npm test`.
+
+I use `mocha` for javascript unit test, transpiling ES6 with `@babel/core`, `@babel/preset-env` and `@babel/register`.
+
+
 ## Benchmark
 
 ### Rust to Native Code
