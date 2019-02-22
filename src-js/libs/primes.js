@@ -12,7 +12,7 @@ const is_prime = n => {
 export const get_primes = n => {
     let i = 0;
 
-    for (let x = 0; x < n; x += 1) {
+    for (let x = 0; x < n+1; x += 1) {
 
         if (is_prime(x)) {
             i += 1;
