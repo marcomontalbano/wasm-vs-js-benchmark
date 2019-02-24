@@ -81,11 +81,11 @@ const _runBenchmark = (payload, chart, times = 5) => {
     return runBenchmark(payload, times,
         value => {
             _chart_addData(chart, `${value.workerName.toUpperCase()} Benchmark`, value.performance.measure.duration.toFixed(2));
-            console.log(value);
+            // console.log(value);
             return value;
         }
     ).then(value => {
-        console.log(value);
+        // console.log(value);
     });
 }
 
@@ -95,7 +95,7 @@ export const createBenchmarkChart = payload => {
     element_chartContainer.classList.add('chart-container');
 
     let element_chartCanvas = document.createElement('canvas');
-    let chart = _createChart(element_chartCanvas, `${payload.method}(${payload.args})`);
+    let chart = _createChart(element_chartCanvas, `${payload.method}`);
 
     element_chartContainer.appendChild(element_chartCanvas);
     document.getElementById('root').appendChild(element_chartContainer);
