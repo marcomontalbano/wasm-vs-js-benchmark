@@ -147,13 +147,17 @@ These benchmarks are recorded on a MacBook Pro (15-inch, 2016) having these spec
 - 16 GB 2133 MHz LPDDR3
 
 ```sh
-cargo build --release
-hyperfine --warmup 3 './target/release/wa-vs-js-benchmark primes-get_primes 100000'
+$ cargo build --release
+
+$ hyperfine --warmup 3 --export-markdown BENCHMARK.md \
+    './target/release/wa-vs-js-benchmark primes-get_primes 100000' \
+    './target/release/wa-vs-js-benchmark matrix-multiply 500 500'
 ```
 
 | Command | Mean [s] | Min…Max [s] |
 |:---|---:|---:|
-| `./target/release/wa-vs-js-benchmark primes-get_primes 100000` | 1.204 ± 0.012 | 1.193…1.235 |
+| `./target/release/wa-vs-js-benchmark primes-get_primes 100000` | 1.198 ± 0.006 | 1.191…1.212 |
+| `./target/release/wa-vs-js-benchmark matrix-multiply 500 500` | 0.420 ± 0.006 | 0.411…0.432 |
 
 
 ### WebAssembly vs Javascript
