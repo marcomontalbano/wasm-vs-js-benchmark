@@ -16,7 +16,8 @@ fn main() {
     let s: String = invoked_fn.into();
 
     match &s[..] {
-        "get_primes" => Box::new(libs::primes::get_primes(args[0].parse().unwrap())),
+        "primes-get_primes" => Box::new(libs::primes::get_primes(args[0].parse().unwrap())),
+        "matrix-multiply" => Box::new(libs::matrix::multiply(args[0].parse().unwrap(), args[1].parse().unwrap())),
         _ => {Box::new(0)}
     };
 }

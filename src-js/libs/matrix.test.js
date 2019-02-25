@@ -72,6 +72,14 @@ const createTestFor = method => {
 }
 
 describe('matrix', () => {
-    createTestFor('multiply');
-    createTestFor('multiply_slower');
+    createTestFor('_multiply');
+    createTestFor('_multiply_slower');
+
+    it('.multiply()', () => {
+        assert.deepEqual(matrix.multiply(10, 10), 10);
+    });
+
+    it('.multiply_slower()', () => {
+        assert.deepEqual(matrix.multiply_slower(10, 10), 10);
+    });
 });

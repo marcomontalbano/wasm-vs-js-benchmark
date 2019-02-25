@@ -52,7 +52,7 @@ const _promiseSequential = fns => {
 
 export const runBenchmark = (payload, times = 5, eachTime = value => value) => {
     return _promiseSequential(_cloneArrayElements([
-        // () => rsWorker.postMessage(payload).then(eachTime),
+        () => rsWorker.postMessage(payload).then(eachTime),
         () => jsWorker.postMessage(payload).then(eachTime),
     ], times));
 }

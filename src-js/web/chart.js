@@ -81,11 +81,11 @@ const _runBenchmark = (payload, chart, times = 5) => {
     return runBenchmark(payload, times,
         value => {
             _chart_addData(chart, `${value.workerName.toUpperCase()} Benchmark`, value.performance.measure.duration.toFixed(2));
-            // console.log(value);
+            console.log(value);
             return value;
         }
     ).then(value => {
-        // console.log(value);
+        console.log(value);
     });
 }
 
