@@ -91,14 +91,17 @@ const _runBenchmark = (payload, chart, times = 5) => {
 
 export const createBenchmarkChart = payload => {
 
-    let element_chartContainer = document.createElement('div');
+    let element_chartContainer = document.createElement('a');
+    element_chartContainer.id = `method--${payload.method}`;
     element_chartContainer.classList.add('chart-container');
 
     let element_chartCanvas = document.createElement('canvas');
-    let chart = _createChart(element_chartCanvas, `${payload.method}(${payload.args})`);
+    let chart = _createChart(element_chartCanvas, `${payload.method}(${payload.args.join(', ')})`);
 
     element_chartContainer.appendChild(element_chartCanvas);
     document.getElementById('root').appendChild(element_chartContainer);
 
-    _runBenchmark(payload, chart);
+    return () => {
+        return _runBenchmark(payload, chart);
+    };
 }

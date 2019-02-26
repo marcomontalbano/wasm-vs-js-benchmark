@@ -86,16 +86,16 @@ $ cargo build --release
 Now that we have built our code, we can run it:
 
 ```sh
-$ ./target/release/wa-vs-js-benchmark get_primes 11
+$ ./target/release/wa-vs-js-benchmark primes-get_primes 11
 ```
 
 We can also use `cargo run` to compile and then run it, all in one step:
 
 ```sh
-$ cargo run get_primes 11
+$ cargo run primes-get_primes 11
 
 # compile and run our project with optimizations
-$ cargo run --release get_primes 11
+$ cargo run --release primes-get_primes 11
 ```
 
 Last but not least, we'll compile our project to `.wasm`:
@@ -147,13 +147,17 @@ These benchmarks are recorded on a MacBook Pro (15-inch, 2016) having these spec
 - 16 GB 2133 MHz LPDDR3
 
 ```sh
-cargo build --release
-hyperfine --warmup 3 './target/release/wa-vs-js-benchmark get_primes 100000'
+$ cargo build --release
+
+$ hyperfine --warmup 3 --export-markdown BENCHMARK.md \
+    './target/release/wa-vs-js-benchmark primes-get_primes 100000' \
+    './target/release/wa-vs-js-benchmark matrix-multiply 500 500'
 ```
 
 | Command | Mean [s] | Min…Max [s] |
 |:---|---:|---:|
-| `./target/release/wa-vs-js-benchmark get_primes 100000` | 1.204 ± 0.012 | 1.193…1.235 |
+| `./target/release/wa-vs-js-benchmark primes-get_primes 100000` | 1.198 ± 0.006 | 1.191…1.212 |
+| `./target/release/wa-vs-js-benchmark matrix-multiply 500 500` | 0.420 ± 0.006 | 0.411…0.432 |
 
 
 ### WebAssembly vs Javascript

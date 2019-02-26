@@ -36,13 +36,13 @@ const createPromiseWorker = Worker => {
 const rsWorker = createPromiseWorker(RSWorker);
 const jsWorker = createPromiseWorker(JSWorker);
 
-const _cloneArrayElements = (arr, times) => {
+export const cloneArrayElements = (arr, times) => {
     return arr.reduce((accumulator, currentValue) => {
         return accumulator.concat(Array(times).fill(currentValue))
     }, [])
 }
 
-const _promiseSequential = fns => {
+export const promiseSequential = fns => {
     return fns.reduce((promise, fn) => {
         return promise.then(results => {
             return fn().then([].concat.bind(results));
@@ -51,7 +51,7 @@ const _promiseSequential = fns => {
 };
 
 export const runBenchmark = (payload, times = 5, eachTime = value => value) => {
-    return _promiseSequential(_cloneArrayElements([
+    return promiseSequential(cloneArrayElements([
         () => rsWorker.postMessage(payload).then(eachTime),
         () => jsWorker.postMessage(payload).then(eachTime),
     ], times));
