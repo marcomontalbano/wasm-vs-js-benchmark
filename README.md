@@ -1,6 +1,6 @@
 # WebAssembly vs Javascript
 
-[![Build Status](https://travis-ci.org/marcomontalbano/wa-vs-js-benchmark.svg?branch=master)](https://travis-ci.org/marcomontalbano/wa-vs-js-benchmark)
+[![Build Status](https://travis-ci.org/marcomontalbano/wasm-vs-js-benchmark.svg?branch=master)](https://travis-ci.org/marcomontalbano/wasm-vs-js-benchmark)
 
 *A comparison between WebAssembly and Javascript made for ~~studying~~ fun.*
 
@@ -86,7 +86,7 @@ $ cargo build --release
 Now that we have built our code, we can run it:
 
 ```sh
-$ ./target/release/wa-vs-js-benchmark primes-get_primes 11
+$ ./target/release/wasm-vs-js-benchmark primes-get_primes 11
 ```
 
 We can also use `cargo run` to compile and then run it, all in one step:
@@ -150,19 +150,19 @@ These benchmarks are recorded on a MacBook Pro (15-inch, 2016) having these spec
 $ cargo build --release
 
 $ hyperfine --warmup 3 --export-markdown BENCHMARK.md \
-    './target/release/wa-vs-js-benchmark primes-get_primes 100000' \
-    './target/release/wa-vs-js-benchmark matrix-multiply 500 500'
+    './target/release/wasm-vs-js-benchmark primes-get_primes 100000' \
+    './target/release/wasm-vs-js-benchmark matrix-multiply 500 500'
 ```
 
 | Command | Mean [s] | Min…Max [s] |
 |:---|---:|---:|
-| `./target/release/wa-vs-js-benchmark primes-get_primes 100000` | 1.198 ± 0.006 | 1.191…1.212 |
-| `./target/release/wa-vs-js-benchmark matrix-multiply 500 500` | 0.420 ± 0.006 | 0.411…0.432 |
+| `./target/release/wasm-vs-js-benchmark primes-get_primes 100000` | 1.211 ± 0.018 | 1.196…1.255 |
+| `./target/release/wasm-vs-js-benchmark matrix-multiply 500 500` | 0.435 ± 0.016 | 0.417…0.469 |
 
 
 ### WebAssembly vs Javascript
 
-https://marcomontalbano.github.io/wa-vs-js-benchmark
+https://marcomontalbano.github.io/wasm-vs-js-benchmark
 
 
 ## Useful Links

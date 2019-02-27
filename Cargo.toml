@@ -1,10 +1,10 @@
 [package]
-name = "wa-vs-js-benchmark"
+name = "wasm-vs-js-benchmark"
 version = "0.1.0"
 authors = ["Marco Montalbano <marcomontalbano.work@gmail.com>"]
 description = "A benchmark for WebAssembly and Javascript."
 license = "MIT"
-repository = "https://github.com/marcomontalbano/wa-vs-js-benchmark"
+repository = "https://github.com/marcomontalbano/wasm-vs-js-benchmark"
 edition = "2018"
 
 [lib]

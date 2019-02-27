@@ -50,13 +50,6 @@ version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "wa-vs-js-benchmark"
-version = "0.1.0"
-dependencies = [
- "wasm-bindgen 0.2.33 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "wasm-bindgen"
 version = "0.2.33"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -102,6 +95,13 @@ dependencies = [
 name = "wasm-bindgen-shared"
 version = "0.2.33"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "wasm-vs-js-benchmark"
+version = "0.1.0"
+dependencies = [
+ "wasm-bindgen 0.2.33 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [metadata]
 "checksum cfg-if 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)" = "082bb9b28e00d3c9d39cc03e64ce4cea0f1bb9b3fde493f0cbc008472d22bdf4"
