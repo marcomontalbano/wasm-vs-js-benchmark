@@ -8,8 +8,9 @@ onmessage = e => {
     // WebAssembly.instantiateStreaming(fetch(wasm), { './wasm_vs_js_benchmark': _exp }).then(results => {
     fetch(wasm).then(response => response.arrayBuffer()).then(bytes => WebAssembly.instantiate(bytes, { './wasm_vs_js_benchmark': _exp })).then(results => {
 
-        const performance = measure(e.data.payload.method, () => {
-            return results.instance.exports[e.data.payload.method](...e.data.payload.args)
+        const method = `${e.data.payload.module}_${e.data.payload.method}`;
+        const performance = measure(method, () => {
+            return results.instance.exports[method](...e.data.payload.args)
         })
 
         postMessage({

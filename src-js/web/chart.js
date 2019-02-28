@@ -96,7 +96,7 @@ export const createBenchmarkChart = payload => {
     element_chartContainer.classList.add('chart-container');
 
     let element_chartCanvas = document.createElement('canvas');
-    let chart = _createChart(element_chartCanvas, `${payload.method}(${payload.args.join(', ')})`);
+    let chart = _createChart(element_chartCanvas, `${payload.module}.${payload.method}(${payload.args.join(', ')})`);
 
     element_chartContainer.appendChild(element_chartCanvas);
     document.getElementById('root').appendChild(element_chartContainer);

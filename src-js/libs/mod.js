@@ -1,2 +1,2 @@
-export * from './primes';
-export * from './matrix';
+export const primes = require('./primes');
+export const matrix = require('./matrix');

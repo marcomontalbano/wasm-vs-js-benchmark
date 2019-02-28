@@ -2,32 +2,38 @@ extern crate wasm_bindgen;
 
 use wasm_bindgen::prelude::*;
 
-#[allow(dead_code)]
-fn is_prime(n: i32) -> bool {
-
-    for x in 2..n {
-        if n % x == 0 {
-            return false;
-        }
-    }
-
-    return n >= 2;
+#[wasm_bindgen]
+pub struct Primes {
+    
 }
 
 #[wasm_bindgen]
-#[allow(dead_code)]
-pub fn get_primes(n: i32) -> i32 {
-    let mut i = 0;
+impl Primes {
 
-    for x in 2..n+1 {
+    pub fn is_prime(n: i32) -> bool {
 
-        if is_prime(x) {
-            i += 1;
+        for x in 2..n {
+            if n % x == 0 {
+                return false;
+            }
         }
 
+        return n >= 2;
     }
 
-    return i;
+    pub fn get_primes(n: i32) -> i32 {
+        let mut i = 0;
+
+        for x in 2..n+1 {
+
+            if Primes::is_prime(x) {
+                i += 1;
+            }
+
+        }
+
+        return i;
+    }
 }
 
 #[cfg(test)]
@@ -38,12 +44,12 @@ mod tests {
 
     #[test]
     fn test_is_prime() {
-        assert_eq!(is_prime(2), true);
-        assert_eq!(is_prime(97), true);
+        assert_eq!(Primes::is_prime(2), true);
+        assert_eq!(Primes::is_prime(97), true);
     }
 
     #[test]
     fn test_get_primes() {
-        assert_eq!(get_primes(11), 5);
+        assert_eq!(Primes::get_primes(11), 5);
     }
 }

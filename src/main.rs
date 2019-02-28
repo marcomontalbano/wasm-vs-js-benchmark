@@ -11,8 +11,8 @@ fn main() {
     let s: String = invoked_fn.into();
 
     let result = match &s[..] {
-        "primes-get_primes" => libs::primes::get_primes(args[0].parse().unwrap()),
-        "matrix-multiply" => libs::matrix::multiply(args[0].parse().unwrap(), args[1].parse().unwrap()),
+        "Primes::get_primes" => libs::primes::Primes::get_primes(args[0].parse().unwrap()),
+        "Matrix::multiply" => libs::matrix::Matrix::multiply(args[0].parse().unwrap(), args[1].parse().unwrap()),
         _ => 0
     };
 
