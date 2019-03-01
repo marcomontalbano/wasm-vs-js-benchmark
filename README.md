@@ -1,6 +1,7 @@
 # WebAssembly vs Javascript
 
 [![Build Status](https://travis-ci.org/marcomontalbano/wasm-vs-js-benchmark.svg?branch=master)](https://travis-ci.org/marcomontalbano/wasm-vs-js-benchmark)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=marcomontalbano/wasm-vs-js-benchmark)](https://dependabot.com)
 
 *A comparison between WebAssembly and Javascript made for ~~studying~~ fun.*
 
