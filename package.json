@@ -1,6 +1,6 @@
 {
   "name": "wasm-vs-js-benchmark",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "index.js",
   "author": "Marco Montalbano <marcomontalbano.work@gmail.com>",
   "license": "MIT",
@@ -21,19 +21,19 @@
     "publish": "gh-pages -m 'Publish website.' -b 'gh-pages' -d 'dist' -r \"https://$GH_TOKEN@github.com/marcomontalbano/wasm-vs-js-benchmark\""
   },
   "dependencies": {
-    "chart.js": "~2.7.3"
+    "chart.js": "~2.8.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.3.4",
-    "@babel/preset-env": "~7.3.4",
-    "@babel/register": "~7.0.0",
-    "copy-webpack-plugin": "~5.0.1",
-    "file-loader": "~3.0.1",
+    "@babel/core": "~7.4.5",
+    "@babel/preset-env": "~7.4.5",
+    "@babel/register": "~7.4.4",
+    "copy-webpack-plugin": "~5.0.3",
+    "file-loader": "~4.0.0",
     "gh-pages": "~2.0.1",
-    "mocha": "~6.0.2",
-    "webpack": "~4.29.6",
-    "webpack-cli": "~3.3.0",
-    "webpack-dev-server": "~3.2.1",
+    "mocha": "~6.1.4",
+    "webpack": "~4.33.0",
+    "webpack-cli": "~3.3.2",
+    "webpack-dev-server": "~3.7.0",
     "worker-loader": "~2.0.0"
   }
 }
