@@ -6,7 +6,7 @@ language: node_js
 #     - $TRAVIS_BUILD_DIR/target
 
 node_js:
-  - "8"
+  - "12"
 
 before_install:
   - curl https://sh.rustup.rs -sSf | sh -s -- -y

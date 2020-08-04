@@ -1,4 +1,4 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -8,12 +8,12 @@ module.exports = {
         filename: 'bootstrap.js',
     },
     plugins: [
-        new CopyWebpackPlugin([
-            './public/.nojekyll',
-            './public/favicon.ico',
-            './public/index.html',
-            './public/main.css',
-        ])
+        new CopyPlugin({
+            patterns: [{
+                from: './public/**/*',
+                flatten: true,
+            }],
+        }),
     ],
     module: {
         rules: [
@@ -22,7 +22,7 @@ module.exports = {
                 use: {
                     loader: 'worker-loader',
                     options: {
-                        name: 'js/worker.[hash].js'
+                        filename: 'js/worker.[hash].js'
                     }
                 }
             },
