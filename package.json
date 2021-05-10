@@ -22,7 +22,7 @@
     "publish": "gh-pages -m 'Publish website.' -b 'gh-pages' -d 'dist' -r \"https://$GH_TOKEN@github.com/marcomontalbano/wasm-vs-js-benchmark\""
   },
   "dependencies": {
-    "chart.js": "~2.9.3"
+    "chart.js": "~2.9.4"
   },
   "devDependencies": {
     "@babel/core": "~7.11.0",
