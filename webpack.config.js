@@ -11,7 +11,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [{
                 from: './public/**/*',
-                flatten: true,
+                to: '[name][ext]'
             }],
         }),
     ],

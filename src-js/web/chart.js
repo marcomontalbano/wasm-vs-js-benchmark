@@ -1,7 +1,7 @@
 
 import { runBenchmark } from './utility';
 
-import Chart from 'chart.js';
+import { Chart } from 'chart.js';
 
 const _createChart = (canvas, name) => {
     return new Chart(canvas, {

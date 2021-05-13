@@ -61,12 +61,16 @@ src-js
 The first step is to [install Rust](https://doc.rust-lang.org/stable/book/ch01-01-installation.html). We’ll download Rust through `rustup`, a command line tool for managing Rust versions and associated tools.
 
 Runnig following command we'll install Rust and [Cargo](https://doc.rust-lang.org/cargo) automatically.
+You will also need to install [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/).
 
 ```sh
 $ curl https://sh.rustup.rs -sSf | sh
 
 # install `wasm-pack`
-$ cargo install wasm-pack
+$ curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+# update dependencies
+$ cargo update
 ```
 
 Now we are able to use the following commands from our project folder.

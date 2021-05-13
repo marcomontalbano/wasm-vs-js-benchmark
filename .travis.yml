@@ -11,6 +11,7 @@ node_js:
 before_install:
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
   - source $HOME/.cargo/env
+  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -y
 
 stages:
   - test
@@ -23,8 +24,6 @@ jobs:
       script:
         - npm test
     - stage: deploy
-      before_script:
-        - cargo install wasm-pack
       script:
         - npm run build
         - npm run publish

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "prestart": "npm run build:wasm",
-    "start": "webpack-dev-server --mode=development",
+    "start": "webpack serve --mode=development",
     "start:dist": "npx serve dist",
     "test:rs": "cargo build --verbose && cargo test --verbose",
     "test:js": "mocha --require @babel/register ./src-js/**/*.test.js",
@@ -22,19 +22,19 @@
     "publish": "gh-pages -m 'Publish website.' -b 'gh-pages' -d 'dist' -r \"https://$GH_TOKEN@github.com/marcomontalbano/wasm-vs-js-benchmark\""
   },
   "dependencies": {
-    "chart.js": "~2.9.3"
+    "chart.js": "~2.9.4"
   },
   "devDependencies": {
-    "@babel/core": "~7.11.0",
-    "@babel/preset-env": "~7.11.0",
-    "@babel/register": "~7.10.5",
-    "copy-webpack-plugin": "~6.0.3",
-    "file-loader": "~6.0.0",
+    "@babel/core": "~7.14.2",
+    "@babel/preset-env": "~7.14.2",
+    "@babel/register": "~7.13.16",
+    "copy-webpack-plugin": "~8.1.1",
+    "file-loader": "~6.2.0",
     "gh-pages": "~3.1.0",
-    "mocha": "~8.1.1",
-    "webpack": "~4.44.1",
-    "webpack-cli": "~3.3.12",
-    "webpack-dev-server": "~3.11.0",
-    "worker-loader": "~3.0.0"
+    "mocha": "~8.4.0",
+    "webpack": "~5.37.0",
+    "webpack-cli": "~4.7.0",
+    "webpack-dev-server": "~3.11.2",
+    "worker-loader": "~3.0.8"
   }
 }
