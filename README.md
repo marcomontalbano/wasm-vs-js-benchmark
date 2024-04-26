@@ -9,7 +9,7 @@
 - WebAssembly with Rust
 - Benchmark with fancy charts
 - Web Workers to avoid a frozen main thread
-- Build and deploy with Travis CI
+- Build and deploy with GitHub Actions
 
 ## Rust and WebAssembly
 
