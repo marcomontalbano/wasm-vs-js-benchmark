@@ -50,7 +50,10 @@ export const promiseSequential = fns => {
     }, Promise.resolve([]))
 };
 
-export const runBenchmark = (payload, times = 5, eachTime = value => value) => {
+export const runBenchmark = async (payload, times = 5, eachTime = value => value) => {
+    // await rsWorker.postMessage(payload)
+    // await jsWorker.postMessage(payload)
+
     return promiseSequential(cloneArrayElements([
         () => rsWorker.postMessage(payload).then(eachTime),
         () => jsWorker.postMessage(payload).then(eachTime),

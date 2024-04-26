@@ -1,9 +1,10 @@
+// @ts-check
 
 import { runBenchmark } from './utility';
 
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 
-const _createChart = (canvas, name) => {
+const _createChart = (canvas, name, times) => {
     return new Chart(canvas, {
         type: 'line',
         data: {
@@ -13,47 +14,60 @@ const _createChart = (canvas, name) => {
                     label: 'JS Benchmark',
                     data: [],
                     fill: false,
-                    backgroundColor: '#ffccd7',
-                    borderColor: '#ff6183',
+                    backgroundColor: '#fdf8d2',
+                    borderColor: '#f7df1e',
+                    tension: 0.1,
+                    animation: {
+                        duration: 0
+                    },
                 },
                 {
                     label: 'RS Benchmark',
                     data: [],
                     fill: false,
-                    backgroundColor: '#d1eafa',
-                    borderColor: '#37a3eb',
+                    backgroundColor: '#e0e6fa',
+                    borderColor: '#6884e8',
+                    tension: 0.1,
+                    animation: {
+                        duration: 0
+                    },
                 }
             ]
         },
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: name
+                },
+                tooltip: {
+                    mode: 'nearest',
+                    intersect: false,
+                },
+            },
             responsive: true,
-            title: {
-                display: true,
-                text: name
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
             hover: {
                 mode: 'nearest',
                 intersect: true,
             },
             scales: {
-                xAxes: [{
+                x: {
                     display: true,
-                    scaleLabel: {
+                    title: {
                         display: true,
-                        labelString: 'Index'
+                        text: 'Index'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
+                    beginAtZero: true,
                     display: true,
-                    scaleLabel: {
+                    suggestedMin: 0,
+                    suggestedMax: 1000,
+                    title: {
                         display: true,
-                        labelString: 'ms'
+                        text: 'ms'
                     }
-                }]
+                }
             }
         }
     });
@@ -77,7 +91,7 @@ const _chart_addData = (chart, label, value) => {
     chart.update();
 }
 
-const _runBenchmark = (payload, chart, times = 5) => {
+const _runBenchmark = (payload, chart, times) => {
     return runBenchmark(payload, times,
         value => {
             _chart_addData(chart, `${value.workerName.toUpperCase()} Benchmark`, value.performance.measure.duration.toFixed(2));
@@ -90,18 +104,22 @@ const _runBenchmark = (payload, chart, times = 5) => {
 }
 
 export const createBenchmarkChart = payload => {
+    const times = 5
 
     let element_chartContainer = document.createElement('a');
     element_chartContainer.id = `method--${payload.method}`;
     element_chartContainer.classList.add('chart-container');
 
     let element_chartCanvas = document.createElement('canvas');
-    let chart = _createChart(element_chartCanvas, `${payload.method}(${payload.args.join(', ')})`);
+    let chart = _createChart(element_chartCanvas, `${payload.method}(${payload.args.join(', ')})`, times);
 
     element_chartContainer.appendChild(element_chartCanvas);
-    document.getElementById('root').appendChild(element_chartContainer);
+    const root = document.getElementById('root')
+    if (root != null) {
+        root.appendChild(element_chartContainer);
+    }
 
     return () => {
-        return _runBenchmark(payload, chart);
+        return _runBenchmark(payload, chart, times);
     };
 }

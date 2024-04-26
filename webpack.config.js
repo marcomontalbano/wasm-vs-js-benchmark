@@ -1,6 +1,9 @@
+// @ts-check
+
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
     entry: './src-js/bootstrap.js',
     output: {

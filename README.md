@@ -1,7 +1,6 @@
 # WebAssembly vs Javascript
 
 [![Build Status](https://travis-ci.org/marcomontalbano/wasm-vs-js-benchmark.svg?branch=master)](https://travis-ci.org/marcomontalbano/wasm-vs-js-benchmark)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=marcomontalbano/wasm-vs-js-benchmark)](https://dependabot.com)
 
 *A comparison between WebAssembly and Javascript made for ~~studying~~ fun.*
 
@@ -17,7 +16,7 @@
 There are two books that fully cover this section:
 
 - https://doc.rust-lang.org/book
-- https://rustwasm.github.io/book
+- https://rustwasm.github.io/docs/book
 
 In this project I'm also using [`wasm-bingen`](https://rustwasm.github.io/wasm-bindgen) and [`wasm-pack`](https://github.com/rustwasm/wasm-pack).
 
@@ -25,12 +24,12 @@ In this project I'm also using [`wasm-bingen`](https://rustwasm.github.io/wasm-b
 
 ### Folder Structure
 
-Source code is splitted into two main folders: `src` that contains our Rust application and `src-js` that contains our Javascript application.
+Source code is splitted into two main folders: `src-rs` that contains our Rust application and `src-js` that contains our Javascript application.
 
 I tried to make their folder structure as similar as possible:
 
 ```sh
-src
+src-rs
 ├── libs
 │   ├── mod.rs
 │   ├── ...
@@ -64,7 +63,7 @@ Runnig following command we'll install Rust and [Cargo](https://doc.rust-lang.or
 You will also need to install [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/).
 
 ```sh
-$ curl https://sh.rustup.rs -sSf | sh
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # install `wasm-pack`
 $ curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
@@ -79,11 +78,11 @@ Now we are able to use the following commands from our project folder.
 # test .rs files
 $ cargo test
 
-# compile `src/main.rs`
+# compile `src-rs/main.rs`
 $ cargo build
     Finished dev [unoptimized + debuginfo] target(s)
 
-# or compile `src/main.rs` with optimizations
+# or compile `src-rs/main.rs` with optimizations
 $ cargo build --release
     Finished release [optimized] target(s)
 ```
@@ -180,7 +179,7 @@ https://marcomontalbano.github.io/wasm-vs-js-benchmark
 - https://developer.mozilla.org/en-US/docs/WebAssembly
 - https://developer.mozilla.org/en-US/docs/WebAssembly/rust_to_wasm
 
-- https://rustwasm.github.io/book
+- https://rustwasm.github.io/docs/book
 - https://rustwasm.github.io/wasm-bindgen
 
 - https://github.com/rustwasm/create-wasm-app
