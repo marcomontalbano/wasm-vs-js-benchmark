@@ -1,6 +1,6 @@
 # WebAssembly vs Javascript
 
-[![Deploy to Pages](https://github.com/marcomontalbano/wasm-vs-js-benchmark/actions/workflows/gh-pages.yaml/badge.svg?branch=main)](https://github.com/marcomontalbano/wasm-vs-js-benchmark/actions/workflows/gh-pages.yaml)
+[![Deploy to Pages](https://img.shields.io/github/actions/workflow/status/marcomontalbano/wasm-vs-js-benchmark/gh-pages.yaml?style=for-the-badge&logo=github&label=deploy%20to%20pages)](https://github.com/marcomontalbano/wasm-vs-js-benchmark/actions/workflows/gh-pages.yaml)
 
 *A comparison between WebAssembly and Javascript made for ~~studying~~ fun.*
 
