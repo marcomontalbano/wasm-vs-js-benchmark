@@ -10,6 +10,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bootstrap.js',
     },
+    stats: {
+        children: true,
+    },
     plugins: [
         new CopyPlugin({
             patterns: [{
