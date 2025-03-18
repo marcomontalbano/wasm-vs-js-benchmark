@@ -105,7 +105,7 @@ $ cargo run --release primes-get_primes 11
 Last but not least, we'll compile our project to `.wasm`:
 
 ```sh
-$ wasm-pack build
+$ wasm-pack build --target web
 ```
 
 Now we are able to use the content of `./pkg` folder for our web application.

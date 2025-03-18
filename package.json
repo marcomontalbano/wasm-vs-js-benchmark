@@ -15,7 +15,7 @@
     "test:rs": "cargo build --verbose && cargo test --verbose",
     "test:js": "mocha --require @babel/register ./src-js/**/*.test.js",
     "test": "npm run test:rs && npm run test:js",
-    "build:wasm": "wasm-pack build",
+    "build:wasm": "wasm-pack build --target web",
     "build:rs": "cargo build --release",
     "build:js": "webpack --mode=production --config webpack.config.js",
     "build": "npm run build:wasm && npm run build:js",

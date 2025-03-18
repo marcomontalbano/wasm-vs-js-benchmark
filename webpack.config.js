@@ -32,19 +32,19 @@ module.exports = {
                     }
                 }
             },
-            {
-                test: /\.wasm$/,
-                type: 'javascript/auto', /** this disabled webpacks default handling of wasm */
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'wasm/[name].[hash].[ext]',
-                            publicPath: '../'
-                        }
-                    }
-                ]
-            }
+            // {
+            //     test: /\.wasm$/,
+            //     type: 'javascript/auto', /** this disabled webpacks default handling of wasm */
+            //     use: [
+            //         {
+            //             loader: 'file-loader',
+            //             options: {
+            //                 name: 'wasm/[name].[hash].[ext]',
+            //                 publicPath: '../'
+            //             }
+            //         }
+            //     ]
+            // }
         ]
     }
 };
